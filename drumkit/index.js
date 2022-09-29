@@ -22,4 +22,20 @@ const createDiv = (text) => {
 
 const display = (sound) => Object.keys(sound).forEach(createDiv);
 
+const playSound = (word) => {
+    const audio = new Audio(`./sound/${sound[word]}`);
+    audio.play();
+}
+
+const activeDiv = (event) => {
+    const word = event.target.id;
+    const allowWord = sound.hasOwnProperty(word);
+    if (allowWord) {
+        playSound(word)
+    }
+}
+
 display(sound);
+
+document.getElementById('container')
+    .addEventListener('click', activeDiv);
