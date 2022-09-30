@@ -27,11 +27,28 @@ const playSound = (word) => {
     audio.play();
 }
 
+const addEfecct = (word) =>  document.getElementById(word)
+                                     .classList.add('active');
+
+const removeEfecct = (word) => {
+    const div = document.getElementById(word);
+    const removeActive = () => div.classList.remove('active')
+    div.addEventListener('transitionend', removeActive);
+}
+
 const activeDiv = (event) => {
-    const word = event.target.id;
+    let word = '';
+    if (event.type == 'click') {
+         word = event.target.id;
+    } else {
+         word = event.key.toUpperCase();
+    }
+
     const allowWord = sound.hasOwnProperty(word);
     if (allowWord) {
-        playSound(word)
+        addEfecct(word);
+        playSound(word);
+        removeEfecct(word);
     }
 }
 
@@ -39,3 +56,5 @@ display(sound);
 
 document.getElementById('container')
     .addEventListener('click', activeDiv);
+
+    window.addEventListener('keydown', activeDiv);
