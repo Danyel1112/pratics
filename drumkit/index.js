@@ -36,14 +36,8 @@ const removeEfecct = (word) => {
     div.addEventListener('transitionend', removeActive);
 }
 
-const activeDiv = (event) => {
-    let word = '';
-    if (event.type == 'click') {
-         word = event.target.id;
-    } else {
-         word = event.key.toUpperCase();
-    }
-
+const activeDiv = (event) => { 
+    const word = event.type == 'click' ? event.target.id : event.key.toUpperCase();
     const allowWord = sound.hasOwnProperty(word);
     if (allowWord) {
         addEfecct(word);
